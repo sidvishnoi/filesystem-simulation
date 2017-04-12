@@ -1,0 +1,47 @@
+help / h
+    shows this help message
+
+read SECTOR / r SECTOR
+    reads data in sector SECTOR
+
+write SECTOR / r SECTOR
+    writes to sector SECTOR
+
+check SECTOR / c SECTOR
+    checks if SECTOR is busy/free/reserved/dir_entry or other
+
+format / f
+    resets disk
+
+new FILE_NAME [SRC_FILE] / n FILE_NAME [SRC_FILE]
+    create a new file titled FILE_NAME in the current working directory
+
+cat FILE_NAME
+    print the content of file with title FILE_NAME
+
+del FILE_NAME
+    delete a file
+
+undel FILE_NAME
+    un-delete (attempt to recover) deleted file
+
+mkdir DIR
+    create a new directory in the current working directory, with title DIR
+
+chdir DIR / cd DIR
+    change the current working directory to DIR
+
+pwd
+    print current working directory
+
+list / ls
+    list the files and directories in current working directory
+
+tree
+    print the filesytem as tree
+
+info
+    print the details of file system
+
+exit / q
+    exit
