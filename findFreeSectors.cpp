@@ -19,7 +19,6 @@ int FileSystem::findFreeSectors(int sectorsNeeded, std::vector<int> &sectorsFree
     sector = kReservedSectors + sectorsForDir;
     while (sectorsFound < sectorsNeeded) {
         int status = getStatus(sector);
-        std::cout << status << ", ";
         if (status < 0) {
             sectorsFree[sectorsFound++] = sector;
         } else if (status == NOT_FOUND) {

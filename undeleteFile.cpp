@@ -42,19 +42,28 @@ int FileSystem::undeleteFile(const char *title) {
 
 
     int status = test.entry.startsAt;
+    int sectorsToLookFor = test.entry.size / kSectorSize + 1;
     bool isRecoverable = true;
-    do {
+    int sec = 0;
+    while (sec < sectorsToLookFor) {
         int nxt = getStatus(-status);
         if (nxt > -1) {
             isRecoverable = false;
             break;
         }
-        updateStatus(-status, -nxt);
+        ++sec;
         status = nxt;
-    } while (status != -1);
+    };
 
 
     if (isRecoverable) {
+        status = test.entry.startsAt;
+        do {
+            int nxt = getStatus(-status);
+            status = nxt;
+            updateStatus(-status, -nxt);
+        } while (status != -1);
+
         test.entry.type = 'F';
         test.entry.startsAt = -test.entry.startsAt;
         for (int i = byteforEntry, j = 0; j < 32; ++i, ++j) {

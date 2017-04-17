@@ -50,7 +50,9 @@ int FileSystem::createFile(const char *title, const char *srcFile) {
     // find sectors to write in
     int sectorsNeeded = entry.entry.size / kSectorSize + 1;
     std::vector<int> sectorsFree(sectorsNeeded);
-    findFreeSectors(sectorsNeeded, sectorsFree);
+    if (findFreeSectors(sectorsNeeded, sectorsFree) == 1) {
+        return 1;
+    };
 
     entry.entry.startsAt = sectorsFree[0];
 
@@ -78,6 +80,10 @@ int FileSystem::createFile(const char *title, const char *srcFile) {
             }
         }
         if (positionFound) break;
+    }
+    if (!positionFound) {
+        std::cout << "Cannot contain more than " << sectorsForDir*16 << " entries" << std::endl;
+        return 1;
     }
     // update buffer
     for (int i = byteforEntry, j = 0; j < 32; ++i, ++j) {

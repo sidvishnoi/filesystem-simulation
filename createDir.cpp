@@ -24,9 +24,20 @@ int FileSystem::createDir(const char *title) {
 
 
     // look for free space and reserve space for this directory's entries
-    std::vector<int> sectorsFree(sectorsForDir);
-    if (findFreeSectors(sectorsForDir, sectorsFree) == 1) {
-        return 1;
+    std::vector<int> sectorsFree;
+    int sec = kReservedSectors + sectorsForDir;
+    while (sectorsFree.size() != sectorsForDir) {
+        int status = getStatus(sec);
+        if (status == FREE) {
+            sectorsFree.push_back(sec);
+        } else {
+            sectorsFree.clear();
+        }
+        if (status == NOT_FOUND) {
+            std::cout << "Not enough space" << std::endl;
+            return 1;
+        }
+        ++sec;
     }
 
     entry.entry.startsAt = sectorsFree[0];
