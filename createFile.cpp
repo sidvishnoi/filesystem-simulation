@@ -48,7 +48,7 @@ int FileSystem::createFile(const char *title, const char *srcFile) {
 
 
     // find sectors to write in
-    int sectorsNeeded = entry.entry.size / kSectorSize + 1;
+    int sectorsNeeded = (entry.entry.size - 1) / kSectorSize + 1;
     std::vector<int> sectorsFree(sectorsNeeded);
     if (findFreeSectors(sectorsNeeded, sectorsFree) == 1) {
         return 1;
