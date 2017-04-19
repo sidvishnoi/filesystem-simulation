@@ -12,8 +12,10 @@
 #ifndef COLORS    // colors for terminal
 #define COLORS ""
 #define KRST  "\x1B[0m"
+#define KGRN "\x1b[32m"
+#define KYEL "\x1b[33m"
 #define KBLU  "\x1B[34m"
-#define BBLU "\x1B[44m"
+#define DASH u8"\u2015" << u8"\u2015" << " "
 #endif
 
 // int to char[4] typecast
@@ -78,7 +80,7 @@ class FileSystem {
     int printWorkingDir();
     void listDirectoryContents();
     void info();
-    void tree(int level = 1);
+    void tree(int level = 1, int spacing = 2);
 };
 
 std::vector<std::string> split(const std::string &s, const char delim);

@@ -9,7 +9,7 @@ int handleInput(FileSystem &disk) {
         1: exit
     */
     std::string command;
-    std::cout << KBLU << "(myFileSystem)> " << KRST;
+    std::cout << KGRN << "(myFileSystem)> " << KRST;
     getline(std::cin, command);
     if (command.empty()) return 1;
 
@@ -184,7 +184,7 @@ int handleInput(FileSystem &disk) {
         case EXIT:
             return 1;
         default:
-            std::cout << "(mydisk): command not found: " << fun << std::endl;
+            std::cout << "(myFileSystem): command not found: " << fun << std::endl;
             return 0;
     }
     return 0;
